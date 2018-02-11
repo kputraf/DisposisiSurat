@@ -7,7 +7,7 @@ class user_model extends CI_Model {
 	{
 		parent::__construct();
 	}
-	public function tampilkan()
+	public function datauser()
 	{
 		return $this->db
 		->get('user')->result();
@@ -42,17 +42,21 @@ class user_model extends CI_Model {
 			return FALSE;
 		}
 	}
-	public function update($id)
+	public function lihatupdate($update)
 	{
-		$data=array(
-			'username'=>$this->input->post('username'),
-			'fullname'=>$this->input->post('fullname'),
-			'level'=>$this->input->post('level')
-		);
-
-		$this->db->where('id',$id)->update('user',$data);
-
-		if($this->db->affected_rows()>0)
+		return $this->db->where('id',$update)->get('user')->row();
+	}
+	public function dataupdate($update)
+	{
+		 $data = array(
+        'username' => $this->input->post('username'),
+        'password'=>password_hash($this->input->post('username'),PASSWORD_DEFAULT),
+        'fullname'=>$this->input->post('fullname'),
+		'level'=>$this->input->post('level')
+                );
+        $this->db->where('id', $update);
+        $this->db->update('user', $data);		
+        if($this->db->affected_rows()>0)
 		{
 			return TRUE;
 		}

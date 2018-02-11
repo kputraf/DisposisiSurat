@@ -10,8 +10,13 @@ class suratmasuk_model extends CI_Model {
 	public function tampilkan()
 	{
 		return $this->db
+		->select('*,mail.id')
 		->join('mail_type','mail.mail_typeid=mail_type.id')
 		->get('mail')->result();
+	}
+	public function tampilkantipe()
+	{
+		return $this->db->get('mail_type')->result();
 	}
 	public function cari($cari)
 	{
@@ -58,16 +63,35 @@ class suratmasuk_model extends CI_Model {
 			return FALSE;
 		}
 	}
-	public function update($id)
+	public function lihatupdate($update)
+	{
+		return $this->db->where('id',$update)->get('mail')->row();
+	}
+	public function dataupdatefile($surat)
+	{
+		$data = array(
+				'file_upload' => $surat['file_name']
+		);
+		$this->db->where('id',$this->input->post('update_file_upload'))
+				 ->update('mail',$data);
+
+
+	}
+	public function dataupdate($update)
 	{
 		$data=array(
-			'username'=>$this->input->post('username'),
-			'fullname'=>$this->input->post('fullname'),
-			'level'=>$this->input->post('level')
+				'mail_code'=>$this->input->post('mail_code'),
+				'incoming_at'=>$this->input->post('incoming_at'),
+				'mail_from'=>$this->input->post('mail_from'),
+				'mail_to'=>$this->input->post('mail_to'),
+				'mail_subject'=>$this->input->post('mail_subject'),
+				'description'=>$this->input->post('description'),
+				'mail_typeid'=>$this->input->post('mail_typeid'),
+				'userid'=>$this->input->post('userid')
+
 		);
-
-		$this->db->where('id',$id)->update('user',$data);
-
+		$this->db->where('id',$update);
+		$this->db->update('mail',$data);
 		if($this->db->affected_rows()>0)
 		{
 			return TRUE;

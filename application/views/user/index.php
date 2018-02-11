@@ -9,7 +9,7 @@
 	</div>
 	<div class="col-sm-6">
 		<div class="input-group custom-search-form">
-        	<input type="text" class="form-control" placeholder="Search...">
+        	<input type="search" class="form-control" placeholder="Search...">
             <span class="input-group-btn">
             <button class="btn btn-default" type="button">
             <i class="fa fa-search"></i>
@@ -42,7 +42,7 @@
    			<td>'.$tampilkan->username.'</td>
    			<td>'.$tampilkan->fullname.'</td>
    			<td>'.$tampilkan->level.'</td>
-   			<td><a href="'.base_url('index.php/user/getUser/'.$tampilkan->id).'" class="btn btn-info">Update</a>
+   			<td><a href="'.base_url('index.php/user/lihatupdate/'.$tampilkan->id).'" class="btn btn-info">Update</a>
             <a href="'.base_url('index.php/user/hapus/'.$tampilkan->id).'" class="btn btn-danger fa fa-trash"></a>
         </td>
         </tr>
@@ -71,11 +71,11 @@
           <div class="form-group">
             <label>Level</label>
             <select class="form-control" name="level">
-              <option value="5">5. Pegawai</option>
-              <option value="4">4. Supervisor</option>
-              <option value="3">3. Manajer</option>
-              <option value="2">2. Direktur</option>
-              <option value="1">1. Sekretaris</option>
+              <option value="5" name="pegawai">5. Pegawai</option>
+              <option value="4" name="supervisor">4. Supervisor</option>
+              <option value="3" name="manajer">3. Manajer</option>
+              <option value="2" name="direktur">2. Direktur</option>
+              <option value="1" name="sekertaris">1. Sekretaris</option>
             </select>
           </div>
         </div>

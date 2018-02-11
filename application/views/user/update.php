@@ -14,19 +14,19 @@
    	<table class="table table-striped table-hover" id="table-user">
    		
    		<tbody>
-      <form action="<?php echo base_url('index.php/user/tambah');?>" method="post">
+      <form action="<?php echo base_url();?>index.php/user/dataupdate/<?php echo $updateuser->id;?>" method="post">
         <div class="modal-body">
           <div class="form-group">
             <label>Username</label>
-            <input type="text" name="username" class="form-control">
+            <input type="text" name="username" class="form-control" value="<?php echo $updateuser->username;?>">
           </div>
           <div class="form-group">
             <label>Nama Lengkap</label>
-            <input type="text" name="fullname" class="form-control">
+            <input type="text" name="fullname" class="form-control" value="<?php echo $updateuser->fullname;?>">
           </div>
           <div class="form-group">
             <label>Level</label>
-            <select class="form-control" name="level">
+            <select class="form-control" name="level" value="">
               <option value="5">5. Pegawai</option>
               <option value="4">4. Supervisor</option>
               <option value="3">3. Manajer</option>
@@ -42,12 +42,4 @@
       </form>
    		</tbody>
    	</table>
-</div>
-<!-- modal tambah pegawai-->
-<div class="modal fade" id="modal_add">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      
-    </div>
-  </div>
 </div>
