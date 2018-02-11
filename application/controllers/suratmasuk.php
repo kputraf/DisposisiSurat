@@ -95,6 +95,19 @@ class suratmasuk extends CI_Controller {
 			redirect('login');
 		}
 	}
+	public function updatefile()
+	{
+		if($this->session->userdata('logged_in')==TRUE)
+		{
+			$data['main_view']='suratmasuk/updatesurat';
+			$update = $this->uri->segment(3);
+			$this->load->view('template',$data);
+		}
+		else
+		{
+			redirect('login');
+		}
+	}
 	public function dataupdatefile($update)
 	{
 		$config['upload_path']='./uploads/';
@@ -102,15 +115,12 @@ class suratmasuk extends CI_Controller {
 		$config['max_size']=5000;
 		$this->load->library('upload',$config);
 
-		if($this->upload->do_upload('surat'))
+		if($this->upload->do_upload('update_file_upload'))
 		{
-			if($this->suratmasuk_model->dataupdatefile($this->upload->data())==TRUE)
-			{
+			if($this->suratmasuk_model->dataupdatefile($this->upload->data(),$update)) {
 				$this->session->set_flashdata('notif','Ubah File Berhasil');
-				redirect('suratmasuk');
-			}
-			else
-			{
+				redirect('suratmasuk'); 		
+			} else {
 				$this->session->set_flashdata('notif','Ubah File Gagal');
 				redirect('suratmasuk');	
 			}
@@ -124,25 +134,16 @@ class suratmasuk extends CI_Controller {
 	public function dataupdate()
 	{
 		$update = $this->uri->segment(3);
-		$data['updatesurat'] = $this->suratmasuk_model->dataupdate($update);
-		if($this->input->post('submit') && $this->session->userdata('logged_in') == TRUE)
-		{
-			if($this->suratmasuk_model->dataupdate($update)==TRUE)
+			if($this->suratmasuk_model->dataupdate($update))
 			{
 				$this->session->set_flashdata('notif','Update Data Surat berhasil');
 				redirect('suratmasuk');
 			}
 			else
 			{
-				$this->session->set_flashdata('notif','Update Data Surat Berhasil');
+				$this->session->set_flashdata('notif','Update Data Surat gagal');
 				redirect('suratmasuk');
 			}
-		}
-		else
-		{
-			$this->session->set_flashdata('notif',validation_errors());
-				redirect('suratmasuk');
-		}
 	}
 	
 }

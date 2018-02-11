@@ -58,7 +58,7 @@
    		
    			<td><a href="'.base_url('uploads/'.$tampilkan->file_upload).'" class="btn btn-sm btn-warning fa fa-info" target="_blank"> Lihat</a>
    			<a href="'.base_url('index.php/suratmasuk/lihatupdate/'.$tampilkan->id).'" class="btn btn-sm btn-primary fa fa-pencil"> Update</a>
-        <a href="'.base_url('index.php/suratmasuk/lihatupdate/'.$tampilkan->id).'" class="btn btn-sm btn-success fa fa-pencil"> Ubah Surat</a>
+        <a href="'.base_url('index.php/suratmasuk/updatefile/'.$tampilkan->id).'" class="btn btn-sm btn-success fa fa-pencil"> Ubah Surat</a>
             <a href="'.base_url('index.php/suratmasuk/hapus/'.$tampilkan->id).'" class="btn btn-sm btn-danger fa fa-trash"></a>
         </td>
         </tr>

@@ -67,15 +67,21 @@ class suratmasuk_model extends CI_Model {
 	{
 		return $this->db->where('id',$update)->get('mail')->row();
 	}
-	public function dataupdatefile($surat)
+	public function dataupdatefile($surat,$update)
 	{
 		$data = array(
 				'file_upload' => $surat['file_name']
 		);
-		$this->db->where('id',$this->input->post('update_file_upload'))
+		$this->db->where('id',$update)
 				 ->update('mail',$data);
-
-
+		if($this->db->affected_rows() == 0)
+		{
+			return FALSE;
+		}
+		else
+		{
+			return TRUE;
+		}		
 	}
 	public function dataupdate($update)
 	{
@@ -92,14 +98,14 @@ class suratmasuk_model extends CI_Model {
 		);
 		$this->db->where('id',$update);
 		$this->db->update('mail',$data);
-		if($this->db->affected_rows()>0)
-		{
-			return TRUE;
-		}
-		else
+		if($this->db->affected_rows() == 0)
 		{
 			return FALSE;
 		}
+		else
+		{
+			return TRUE;
+		}	
 	}
 }
 
